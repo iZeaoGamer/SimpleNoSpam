@@ -76,7 +76,7 @@ class Main extends PluginBase implements Listener{
 		if(isset($this->talked[$p->getName()])){
 			$time = ($this->talked[$p->getName()] + $this->config->get("spam-interval")) - time();
 			if($time > 0){
-				$p->sendMessage($this->config->get("spam-block-message"));
+				$p->sendMessage($this->config->get(TextFormat::colorize("&cYou're typing too fast. You may chat again in &4" . $time . " &cseconds."));
 				$e->setCancelled();
 				return;
 			}
@@ -91,9 +91,10 @@ class Main extends PluginBase implements Listener{
 					$p->sendMessage($this->config->get("swear-block-message"));
 					$this->talked[$p->getName()] = time();
 					$this->warnings[$p->getName()] = $this->warnings[$p->getName()] + 1;
-					if($this->warnings[$p->getName()] >= $this->config->get("warnings-before-kick")){
-						$p->close($this->config->get("kick-message"), $this->config->get("kick-message"));
-					}
+				//	if($this->warnings[$p->getName()] >= $this->config->get("warnings-before-kick")){
+						//$p->close($this->config->get("kick-message"), $this->config->get("kick-message"));
+//$player->sendMessage(TextFormat::colorize("&cPlease don't swear."));
+				//	}
 				}
 				else{
 					$e->setCancelled();
